@@ -146,17 +146,17 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  */
 - (void) configureAudioPlayer
 {
-   // NSString* path = [[NSBundle mainBundle]
+   /* NSString* path = [[NSBundle mainBundle]
                       pathForResource:@"appbeep" ofType:@"wav"];
 
-  //  NSURL* url = [NSURL fileURLWithPath:path];
+    NSURL* url = [NSURL fileURLWithPath:path];
 
 
-   // audioPlayer = [[AVAudioPlayer alloc]
-                  // initWithContentsOfURL:url error:NULL];
+    audioPlayer = [[AVAudioPlayer alloc]
+                   initWithContentsOfURL:url error:NULL];
 
-   // audioPlayer.volume        = 0;
-   // audioPlayer.numberOfLoops = -1;
+    audioPlayer.volume        = 0;
+    audioPlayer.numberOfLoops = -1; */
 };
 
 /**
