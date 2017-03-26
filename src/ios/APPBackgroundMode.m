@@ -19,7 +19,7 @@
   under the License.
 */
 
-#import "APPMethodMagic.h"
+//#import "APPMethodMagic.h"
 #import "APPBackgroundMode.h"
 #import <Cordova/CDVAvailability.h>
 
@@ -42,7 +42,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  */
 + (void) load
 {
-    [self swizzleWKWebViewEngine];
+   // [self swizzleWKWebViewEngine];
 }
 
 /**
@@ -173,9 +173,8 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
     // Play music even in background and dont stop playing music
     // even another app starts playing sound
     [session setCategory:AVAudioSessionCategoryPlayback
-             withOptions:AVAudioSessionCategoryOptionMixWithOthers
                    error:NULL];
-
+    //... removed this above - withOptions:AVAudioSessionCategoryOptionMixWithOthers
     // Active the audio session
     [session setActive:YES error:NULL];
 };
@@ -253,7 +252,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  */
 + (void) swizzleWKWebViewEngine
 {
-    if (![self isRunningWebKit])
+   /* if (![self isRunningWebKit])
         return;
 
     Class wkWebViewEngineCls = NSClassFromString(@"CDVWKWebViewEngine");
@@ -271,7 +270,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
 
         return obj;
     }
-    SwizzleSelectorWithBlock_End;
+    SwizzleSelectorWithBlock_End; */
 }
 
 @end
