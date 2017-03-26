@@ -51,8 +51,7 @@
 
         <header-file src="src/ios/APPBackgroundMode.h" />
         <source-file src="src/ios/APPBackgroundMode.m" />
-        <header-file src="src/ios/APPMethodMagic.h" />
-        <source-file src="src/ios/APPMethodMagic.m" />
+            
     </platform>
 
 </plugin>
