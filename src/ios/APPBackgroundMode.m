@@ -52,8 +52,18 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
 {
     enabled = YES;
    // [self configureAudioPlayer];
-    [self configureAudioSession];
+    // [self configureAudioSession];
    // [self observeLifeCycle];
+  
+   // initializations go here.
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    BOOL ok;
+    NSError *setCategoryError = nil;
+    ok = [audioSession setCategory:AVAudioSessionCategoryPlayback
+                             error:&setCategoryError];
+    if (!ok) {
+        NSLog(@"%s setCategoryError=%@", __PRETTY_FUNCTION__, setCategoryError);
+    }
 }
 
 /**
