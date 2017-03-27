@@ -19,7 +19,7 @@
   under the License.
 */
 
-//#import "APPMethodMagic.h"
+#import "APPMethodMagic.h"
 #import "APPBackgroundMode.h"
 #import <Cordova/CDVAvailability.h>
 
@@ -42,7 +42,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  */
 + (void) load
 {
-   // [self swizzleWKWebViewEngine];
+    [self swizzleWKWebViewEngine];
 }
 
 /**
@@ -50,20 +50,10 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  */
 - (void) pluginInitialize
 {
-    enabled = YES;
-   // [self configureAudioPlayer];
-    // [self configureAudioSession];
-   // [self observeLifeCycle];
-  
-   // initializations go here.
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    BOOL ok;
-    NSError *setCategoryError = nil;
-    ok = [audioSession setCategory:AVAudioSessionCategoryPlayback
-                             error:&setCategoryError];
-    if (!ok) {
-        NSLog(@"%s setCategoryError=%@", __PRETTY_FUNCTION__, setCategoryError);
-    }
+    enabled = NO;
+    [self configureAudioPlayer];
+    [self configureAudioSession];
+    [self observeLifeCycle];
 }
 
 /**
@@ -131,7 +121,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
     if (!enabled)
         return;
 
-    //[audioPlayer play];
+    [audioPlayer play];
     [self fireEvent:kAPPBackgroundEventActivate];
 }
 
@@ -144,11 +134,11 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
         NSLog(@"BackgroundMode: On simulator apps never pause in background!");
     }
 
-    //if (audioPlayer.isPlaying) {
-    //    [self fireEvent:kAPPBackgroundEventDeactivate];
-  //  }
+    if (audioPlayer.isPlaying) {
+        [self fireEvent:kAPPBackgroundEventDeactivate];
+    }
 
-   // [audioPlayer pause];
+    [audioPlayer pause];
 }
 
 /**
@@ -156,7 +146,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  */
 - (void) configureAudioPlayer
 {
-   /* NSString* path = [[NSBundle mainBundle]
+    NSString* path = [[NSBundle mainBundle]
                       pathForResource:@"appbeep" ofType:@"wav"];
 
     NSURL* url = [NSURL fileURLWithPath:path];
@@ -166,7 +156,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
                    initWithContentsOfURL:url error:NULL];
 
     audioPlayer.volume        = 0;
-    audioPlayer.numberOfLoops = -1; */
+    audioPlayer.numberOfLoops = -1;
 };
 
 /**
@@ -184,7 +174,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
     // even another app starts playing sound
     [session setCategory:AVAudioSessionCategoryPlayback
                    error:NULL];
-    //... removed this above - withOptions:AVAudioSessionCategoryOptionMixWithOthers
+
     // Active the audio session
     [session setActive:YES error:NULL];
 };
@@ -262,7 +252,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  */
 + (void) swizzleWKWebViewEngine
 {
-   /* if (![self isRunningWebKit])
+    if (![self isRunningWebKit])
         return;
 
     Class wkWebViewEngineCls = NSClassFromString(@"CDVWKWebViewEngine");
@@ -280,7 +270,7 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
 
         return obj;
     }
-    SwizzleSelectorWithBlock_End; */
+    SwizzleSelectorWithBlock_End;
 }
 
 @end
